@@ -1,0 +1,13 @@
+{
+  "appId": "com.sternberg.lovescale",
+  "appName": "Test del Amor Triangular",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "Filesystem": {
+      "directory": "Documents"
+    }
+  }
+}

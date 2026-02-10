@@ -1,7 +1,7 @@
 {
   "name": "sternberg-love-scale",
   "version": "1.0.0",
-  "description": "Escala del Modelo Triangular del Amor (Sternberg, 1997) - Aplicación de escritorio",
+  "description": "Escala del Modelo Triangular del Amor (Sternberg, 1997) - Aplicación de escritorio y móvil",
   "main": "src/main.js",
   "author": "Tu Nombre",
   "license": "MIT",
@@ -11,12 +11,24 @@
     "build:win": "electron-builder --win",
     "build:mac": "electron-builder --mac",
     "build:linux": "electron-builder --linux",
-    "build:all": "electron-builder --win --mac --linux"
+    "build:all": "electron-builder --win --mac --linux",
+    "cap:sync": "npx cap sync android",
+    "cap:open": "npx cap open android",
+    "build:android": "npx cap sync android && echo 'Android project synced. Open in Android Studio with: npm run cap:open'",
+    "build:apk": "npx cap sync android && cd android && ./gradlew assembleDebug && echo 'APK generated at: android/app/build/outputs/apk/debug/app-debug.apk'",
+    "build:apk:release": "npx cap sync android && cd android && ./gradlew assembleRelease && echo 'Release APK generated at: android/app/build/outputs/apk/release/'",
+    "generate:icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
+    "@capacitor/core": "^8.0.2",
+    "@capacitor/filesystem": "^8.1.0",
+    "@capacitor/share": "^8.0.0",
     "jspdf": "^2.5.1"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.0.2",
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.0.2",
     "electron": "^28.1.0",
     "electron-builder": "^24.9.1"
   },
@@ -33,11 +45,16 @@
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64", "ia32"]
+          "arch": [
+            "x64",
+            "ia32"
+          ]
         },
         {
           "target": "portable",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "icon": "src/assets/icon.ico"
@@ -46,7 +63,10 @@
       "target": [
         {
           "target": "dmg",
-          "arch": ["x64", "arm64"]
+          "arch": [
+            "x64",
+            "arm64"
+          ]
         }
       ],
       "icon": "src/assets/icon.icns",
@@ -56,11 +76,15 @@
       "target": [
         {
           "target": "AppImage",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         },
         {
           "target": "deb",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "icon": "src/assets/icon.png",

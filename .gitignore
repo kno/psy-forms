@@ -21,3 +21,9 @@ npm-debug.log*
 # Environment
 .env
 .env.local
+
+# Android build artifacts
+android/app/build/
+android/.gradle/
+android/build/
+android/local.properties
