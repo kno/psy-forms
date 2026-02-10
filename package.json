@@ -6,7 +6,7 @@
   "author": "Tu Nombre",
   "license": "MIT",
   "scripts": {
-    "start": "electron .",
+    "start": "ELECTRON_RUN_AS_NODE= electron .",
     "build": "electron-builder",
     "build:win": "electron-builder --win",
     "build:mac": "electron-builder --mac",
@@ -29,8 +29,15 @@
     "@capacitor/android": "^8.0.2",
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^8.0.2",
-    "electron": "^28.1.0",
+    "electron": "^40.2.1",
     "electron-builder": "^24.9.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "core-js",
+      "sharp"
+    ]
   },
   "build": {
     "appId": "com.sternberg.lovescale",
