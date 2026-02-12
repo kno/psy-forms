@@ -2,6 +2,12 @@ const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const fs = require('fs');
 
+const isDev = process.argv.includes('--dev');
+if (isDev) {
+  require('electron-reload')(__dirname, {
+    electron: path.join(__dirname, '..', 'node_modules', '.bin', 'electron')
+  });
+}
 let mainWindow;
 
 function createWindow() {
@@ -22,8 +28,9 @@ function createWindow() {
 
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
-  // Remove menu bar for cleaner look (optional)
-  // mainWindow.setMenuBarVisibility(false);
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null;

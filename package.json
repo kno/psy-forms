@@ -10,6 +10,7 @@
   "homepage": "https://github.com/aruizdesamaniego/sternberg-app",
   "license": "MIT",
   "scripts": {
+    "dev": "ELECTRON_RUN_AS_NODE= electron . --dev",
     "start": "ELECTRON_RUN_AS_NODE= electron .",
     "build": "electron-builder",
     "build:win": "electron-builder --win",
@@ -34,7 +35,8 @@
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^8.0.2",
     "electron": "^40.2.1",
-    "electron-builder": "^24.9.1"
+    "electron-builder": "^24.9.1",
+    "electron-reload": "2.0.0-alpha.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
