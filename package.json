@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "Escala del Modelo Triangular del Amor (Sternberg, 1997) - Aplicación de escritorio y móvil",
   "main": "src/main.js",
-  "author": "Tu Nombre",
+  "author": {
+    "name": "Aitor Ruiz de Samaniego",
+    "email": "aitor@sternberg-app.com"
+  },
+  "homepage": "https://github.com/aruizdesamaniego/sternberg-app",
   "license": "MIT",
   "scripts": {
     "start": "ELECTRON_RUN_AS_NODE= electron .",
@@ -11,12 +15,12 @@
     "build:win": "electron-builder --win",
     "build:mac": "electron-builder --mac",
     "build:linux": "electron-builder --linux",
-    "build:all": "electron-builder --win --mac --linux",
+    "build:all": "pnpm run build:mac && pnpm run build:win && pnpm run build:linux && pnpm run build:apk:release",
     "cap:sync": "npx cap sync android",
     "cap:open": "npx cap open android",
     "build:android": "npx cap sync android && echo 'Android project synced. Open in Android Studio with: npm run cap:open'",
-    "build:apk": "npx cap sync android && cd android && ./gradlew assembleDebug && echo 'APK generated at: android/app/build/outputs/apk/debug/app-debug.apk'",
-    "build:apk:release": "npx cap sync android && cd android && ./gradlew assembleRelease && echo 'Release APK generated at: android/app/build/outputs/apk/release/'",
+    "build:apk": "npx cap sync android && cd android && ANDROID_HOME=/opt/homebrew/share/android-commandlinetools JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew assembleDebug && echo 'APK generated at: android/app/build/outputs/apk/debug/app-debug.apk'",
+    "build:apk:release": "npx cap sync android && cd android && ANDROID_HOME=/opt/homebrew/share/android-commandlinetools JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew assembleRelease && echo 'Release APK generated at: android/app/build/outputs/apk/release/'",
     "generate:icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
