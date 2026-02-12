@@ -13,8 +13,8 @@ window.CapacitorHelpers = {
     }
 
     try {
-      const { Filesystem, Directory } = window.Capacitor.Plugins.Filesystem || {};
-      const { Share } = window.Capacitor.Plugins.Share || {};
+      const Filesystem = window.Capacitor.Plugins.Filesystem;
+      const Share = window.Capacitor.Plugins.Share;
 
       if (!Filesystem) {
         return { success: false, error: 'Filesystem plugin not available' };
