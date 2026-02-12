@@ -160,6 +160,16 @@ function handleAnswer(questionId, value, card) {
   });
 
   updateProgress();
+
+  // Scroll to next question card
+  const nextCard = card.nextElementSibling;
+  if (nextCard) {
+    setTimeout(() => {
+      const rect = nextCard.getBoundingClientRect();
+      const offset = window.scrollY + rect.top - 180;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }, 150);
+  }
 }
 
 function updateProgress() {

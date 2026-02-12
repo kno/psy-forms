@@ -153,13 +153,23 @@ function formatQuestionText(text) {
 
 function handleAnswer(questionId, value, card) {
   state.answers[questionId] = value;
-  
+
   // Update button styles
   card.querySelectorAll('.rating-btn').forEach(btn => {
     btn.classList.toggle('selected', parseInt(btn.dataset.value) === value);
   });
-  
+
   updateProgress();
+
+  // Scroll to next question card
+  const nextCard = card.nextElementSibling;
+  if (nextCard) {
+    setTimeout(() => {
+      const rect = nextCard.getBoundingClientRect();
+      const offset = window.scrollY + rect.top - 180;
+      window.scrollTo({ top: offset, behavior: 'smooth' });
+    }, 150);
+  }
 }
 
 function updateProgress() {
