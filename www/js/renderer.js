@@ -510,6 +510,116 @@ async function generatePDF() {
     doc.setTextColor(150, 150, 150);
     doc.text('Escala del Modelo Triangular del Amor (Sternberg, 1997) \u2013 Adaptaci\u00f3n', pageWidth / 2, pageHeight - 10, { align: 'center' });
 
+    // PAGE 2: All answers
+    doc.addPage();
+    yPos = margin;
+
+    // Title for page 2
+    doc.setFontSize(16);
+    doc.setTextColor(236, 72, 153);
+    doc.text('Respuestas del Cuestionario', pageWidth / 2, yPos, { align: 'center' });
+    yPos += 8;
+
+    // Subtitle with partner name and date
+    doc.setFontSize(10);
+    doc.setTextColor(128, 128, 128);
+    doc.text(`${state.partnerName} - ${new Date().toLocaleDateString('es-ES')}`, pageWidth / 2, yPos, { align: 'center' });
+    yPos += 12;
+
+    // List all 45 questions with answers
+    doc.setFontSize(8);
+    const lineHeight = 5;
+    const maxWidth = pageWidth - margin * 2 - 15; // Leave space for question number and answer
+
+    for (let i = 0; i < questions.length; i++) {
+      const question = questions[i];
+      const answer = state.answers[question.id];
+
+      // Check if we need a new page
+      if (yPos > pageHeight - 30) {
+        // Add footer on current page
+        doc.setFontSize(8);
+        doc.setTextColor(150, 150, 150);
+        doc.text('Escala del Modelo Triangular del Amor (Sternberg, 1997) \u2013 Adaptaci\u00f3n', pageWidth / 2, pageHeight - 10, { align: 'center' });
+
+        // New page
+        doc.addPage();
+        yPos = margin;
+
+        // Repeat title on new page
+        doc.setFontSize(16);
+        doc.setTextColor(236, 72, 153);
+        doc.text('Respuestas del Cuestionario (continuaci\u00f3n)', pageWidth / 2, yPos, { align: 'center' });
+        yPos += 12;
+      }
+
+      // Question number
+      doc.setFontSize(8);
+      doc.setTextColor(60, 60, 60);
+      doc.text(`${question.id}.`, margin, yPos);
+
+      // Question text with partner name replaced
+      const questionText = question.text.replace(/___/g, state.partnerName);
+      const textLines = doc.splitTextToSize(questionText, maxWidth);
+      doc.text(textLines, margin + 6, yPos);
+
+      // Determine color based on component
+      let answerColor;
+      if (intimacyItems.includes(question.id)) {
+        answerColor = [59, 130, 246]; // Blue
+      } else if (passionItems.includes(question.id)) {
+        answerColor = [239, 68, 68]; // Red
+      } else if (commitmentItems.includes(question.id)) {
+        answerColor = [34, 197, 94]; // Green
+      }
+
+      // Answer value (color-coded)
+      doc.setTextColor(...answerColor);
+      doc.setFontSize(9);
+      doc.setFont(undefined, 'bold');
+      doc.text(`${answer}`, pageWidth - margin - 5, yPos, { align: 'right' });
+      doc.setFont(undefined, 'normal');
+
+      // Move down based on number of lines
+      yPos += textLines.length * lineHeight + 2;
+    }
+
+    // Add legend at bottom of last page
+    yPos += 5;
+    if (yPos > pageHeight - 40) {
+      doc.addPage();
+      yPos = margin;
+    }
+
+    doc.setFontSize(9);
+    doc.setTextColor(60, 60, 60);
+    doc.text('Leyenda:', margin, yPos);
+    yPos += 7;
+
+    // Blue circle for intimacy
+    doc.setFillColor(59, 130, 246);
+    doc.circle(margin + 2, yPos - 1.5, 1.5, 'F');
+    doc.setFontSize(8);
+    doc.setTextColor(59, 130, 246);
+    doc.text('Intimidad', margin + 6, yPos);
+
+    // Red circle for passion
+    doc.setFillColor(239, 68, 68);
+    doc.circle(margin + 30, yPos - 1.5, 1.5, 'F');
+    doc.setTextColor(239, 68, 68);
+    doc.text('Pasi\u00f3n', margin + 34, yPos);
+
+    // Green circle for commitment
+    doc.setFillColor(34, 197, 94);
+    doc.circle(margin + 54, yPos - 1.5, 1.5, 'F');
+    doc.setTextColor(34, 197, 94);
+    doc.text('Compromiso', margin + 58, yPos);
+
+    // Footer on last page
+    doc.setFontSize(8);
+    doc.setTextColor(150, 150, 150);
+    doc.text('Escala del Modelo Triangular del Amor (Sternberg, 1997) \u2013 Adaptaci\u00f3n', pageWidth / 2, pageHeight - 10, { align: 'center' });
+
     // Save PDF - platform-aware
     const fileName = `Resultados_Amor_Triangular_${state.partnerName.replace(/\s+/g, '_')}.pdf`;
 
