@@ -22,6 +22,7 @@
     "build:android": "npx cap sync android && echo 'Android project synced. Open in Android Studio with: npm run cap:open'",
     "build:apk": "npx cap sync android && cd android && ANDROID_HOME=/opt/homebrew/share/android-commandlinetools JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew assembleDebug && echo 'APK generated at: android/app/build/outputs/apk/debug/app-debug.apk'",
     "build:apk:release": "npx cap sync android && cd android && ANDROID_HOME=/opt/homebrew/share/android-commandlinetools JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew assembleRelease && echo 'Release APK generated at: android/app/build/outputs/apk/release/'",
+    "build:aab": "npx cap sync android && cd android && ANDROID_HOME=/opt/homebrew/share/android-commandlinetools JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew bundleRelease && echo 'Release AAB generated at: android/app/build/outputs/bundle/release/app-release.aab'",
     "generate:icons": "node scripts/generate-icons.mjs"
   },
   "dependencies": {
