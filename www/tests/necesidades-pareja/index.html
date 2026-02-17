@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Cuestionario de Necesidades en la Pareja</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+      <div class="card start-card">
+        <a href="../../index.html" class="back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5m0 0l7 7m-7-7l7-7"/>
+          </svg>
+          Volver
+        </a>
+        <div class="header">
+          <h1>Cuestionario de Necesidades en la Pareja</h1>
+          <p class="subtitle">(Santiago Madrid, 2013)</p>
+        </div>
+
+        <div class="form-section">
+          <div class="form-group">
+            <label for="partner-name">Nombre de tu pareja</label>
+            <input type="text" id="partner-name" placeholder="Escribe el nombre aquí...">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="user-sex">Sexo</label>
+              <select id="user-sex">
+                <option value="">Seleccionar</option>
+                <option value="Varón">Varón</option>
+                <option value="Mujer">Mujer</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="user-age">Edad</label>
+              <input type="number" id="user-age" placeholder="Años" min="1" max="120">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="relationship-months">Tiempo de relación (en meses)</label>
+            <input type="number" id="relationship-months" placeholder="Meses" min="0">
+          </div>
+        </div>
+
+        <div class="initial-questions">
+          <h3>Antes de comenzar, responde estas dos preguntas:</h3>
+
+          <div class="initial-question">
+            <label>¿Qué importante es mi pareja para mí?</label>
+            <div class="rating-buttons-row" data-field="partnerImportance">
+              <button class="rating-btn-small" data-value="0">0</button>
+              <button class="rating-btn-small" data-value="1">1</button>
+              <button class="rating-btn-small" data-value="2">2</button>
+              <button class="rating-btn-small" data-value="3">3</button>
+              <button class="rating-btn-small" data-value="4">4</button>
+              <button class="rating-btn-small" data-value="5">5</button>
+              <button class="rating-btn-small" data-value="6">6</button>
+              <button class="rating-btn-small" data-value="7">7</button>
+              <button class="rating-btn-small" data-value="8">8</button>
+              <button class="rating-btn-small" data-value="9">9</button>
+              <button class="rating-btn-small" data-value="10">10</button>
+            </div>
+            <div class="rating-labels">
+              <span>Nada</span>
+              <span>Muchísimo</span>
+            </div>
+          </div>
+
+          <div class="initial-question">
+            <label>¿Qué importante creo que soy para mi pareja?</label>
+            <div class="rating-buttons-row" data-field="selfImportance">
+              <button class="rating-btn-small" data-value="0">0</button>
+              <button class="rating-btn-small" data-value="1">1</button>
+              <button class="rating-btn-small" data-value="2">2</button>
+              <button class="rating-btn-small" data-value="3">3</button>
+              <button class="rating-btn-small" data-value="4">4</button>
+              <button class="rating-btn-small" data-value="5">5</button>
+              <button class="rating-btn-small" data-value="6">6</button>
+              <button class="rating-btn-small" data-value="7">7</button>
+              <button class="rating-btn-small" data-value="8">8</button>
+              <button class="rating-btn-small" data-value="9">9</button>
+              <button class="rating-btn-small" data-value="10">10</button>
+            </div>
+            <div class="rating-labels">
+              <span>Nada</span>
+              <span>Muchísimo</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="start-btn" class="btn btn-primary" disabled>Comenzar el cuestionario</button>
+
+        <div class="instructions">
+          <h3>Instrucciones:</h3>
+          <p>Se presentarán 17 necesidades personales. Para cada una, indica:</p>
+          <ul>
+            <li><strong>Para ti:</strong> qué importancia tiene (0-10), en qué grado la recibes de tu pareja (0-10), y si esperas exclusividad.</li>
+            <li><strong>Para tu pareja:</strong> qué importancia crees que tiene para ella (0-10), en qué grado se la otorgas (0-10), y si crees que espera exclusividad.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questions Screen -->
+    <div id="questions-screen" class="screen">
+      <div class="questions-header">
+        <a href="../../index.html" class="abandon-link" onclick="return confirm('Si abandonas el cuestionario perderás tu progreso. ¿Estás seguro?');">Abandonar</a>
+        <h2>Necesidades en la Pareja</h2>
+        <p>Evaluando tu relación con <span id="header-partner-name"></span></p>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div id="progress-fill" class="progress-fill"></div>
+          </div>
+          <p id="progress-text">0 de 17 necesidades completadas</p>
+        </div>
+      </div>
+
+      <div id="needs-container" class="needs-container"></div>
+
+      <div class="questions-footer">
+        <button id="submit-btn" class="btn btn-primary" disabled>
+          Faltan 17 necesidades
+        </button>
+      </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results-screen" class="screen">
+      <div class="card results-card">
+        <h2>Resultados para <span id="results-partner-name"></span></h2>
+
+        <div class="initial-results">
+          <div class="initial-result-box">
+            <div class="initial-result-value" id="result-partner-importance">0</div>
+            <div class="initial-result-label">Importancia de mi pareja para mí</div>
+          </div>
+          <div class="initial-result-box">
+            <div class="initial-result-value" id="result-self-importance">0</div>
+            <div class="initial-result-label">Importancia que creo tener para mi pareja</div>
+          </div>
+        </div>
+
+        <div class="results-section">
+          <h3>Mis necesidades: Importancia vs. Satisfacción</h3>
+          <p class="results-section-desc">Lo que valoro frente a lo que recibo de mi pareja</p>
+          <div class="chart-container">
+            <svg id="my-needs-chart" class="bar-chart"></svg>
+          </div>
+        </div>
+
+        <div class="results-section">
+          <h3>Percepción de mi pareja: Importancia vs. Lo que otorgo</h3>
+          <p class="results-section-desc">Lo que creo que mi pareja valora frente a lo que le doy</p>
+          <div class="chart-container">
+            <svg id="partner-needs-chart" class="bar-chart"></svg>
+          </div>
+        </div>
+
+        <div id="top-unmet-section" class="top-unmet-section">
+          <h3>Necesidades más insatisfechas</h3>
+          <div id="top-unmet-list"></div>
+        </div>
+
+        <div id="exclusivity-section" class="exclusivity-section">
+          <h3>Exclusividad</h3>
+          <div id="exclusivity-summary"></div>
+        </div>
+
+        <div class="interpretation">
+          <h4>Interpretación:</h4>
+          <ul>
+            <li><strong>Brecha negativa:</strong> Necesidad insatisfecha (valoras más de lo que recibes)</li>
+            <li><strong>Brecha positiva o cero:</strong> Necesidad cubierta o sobresatisfecha</li>
+            <li>Cuanto mayor la brecha negativa, mayor la insatisfacción en esa área</li>
+          </ul>
+        </div>
+
+        <div class="buttons-row">
+          <button id="download-pdf-btn" class="btn btn-secondary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Descargar PDF
+          </button>
+          <button id="restart-btn" class="btn btn-primary">Realizar otro test</button>
+        </div>
+
+        <p class="privacy-note">Los datos no se envían a ningún servidor. Todo se procesa localmente en tu dispositivo.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/jspdf.umd.min.js"></script>
+  <script src="../../js/capacitor-helpers.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
