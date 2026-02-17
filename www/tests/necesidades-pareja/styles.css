@@ -177,12 +177,13 @@ body {
 .rating-buttons-row {
   display: flex;
   justify-content: space-between;
-  gap: 4px;
+  gap: 3px;
 }
 
 .rating-btn-small {
-  width: 32px;
-  height: 32px;
+  flex: 1 1 0;
+  max-width: 32px;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: none;
   background: #e5e7eb;
@@ -191,7 +192,7 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  flex-shrink: 0;
+  padding: 0;
 }
 
 .rating-btn-small:hover {
@@ -448,12 +449,13 @@ body {
 
 .dimension-buttons {
   display: flex;
-  gap: 4px;
+  gap: 3px;
 }
 
 .dim-btn {
-  width: 30px;
-  height: 30px;
+  flex: 1 1 0;
+  max-width: 30px;
+  aspect-ratio: 1;
   border-radius: 50%;
   border: none;
   background: white;
@@ -462,7 +464,7 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  flex-shrink: 0;
+  padding: 0;
 }
 
 .need-section-mine .dim-btn:hover {
@@ -781,19 +783,48 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .card {
+    padding: 20px 16px;
+  }
+
   .rating-btn-small {
-    width: 27px;
-    height: 27px;
     font-size: 0.7rem;
   }
 
   .dim-btn {
-    width: 26px;
-    height: 26px;
     font-size: 0.7rem;
   }
 
   .need-section {
     padding: 10px;
+  }
+
+  .toggle-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  .rating-btn-small,
+  .dim-btn {
+    font-size: 0.65rem;
+  }
+
+  .rating-buttons-row,
+  .dimension-buttons {
+    gap: 2px;
+  }
+
+  .initial-questions {
+    padding: 14px;
+  }
+
+  .need-section {
+    padding: 8px;
+  }
+
+  .need-card {
+    padding: 14px;
   }
 }
