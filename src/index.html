@@ -4,142 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
-  <title>Test del Amor Triangular - Sternberg</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Tests Psicológicos</title>
+  <link rel="stylesheet" href="home.css">
 </head>
 <body>
   <div id="app">
-    <!-- Start Screen -->
-    <div id="start-screen" class="screen active">
-      <div class="card start-card">
-        <div class="header">
-          <h1>Escala del Modelo Triangular del Amor</h1>
-          <p class="subtitle">(Sternberg, 1997) – Adaptación</p>
+    <div class="home-screen">
+      <div class="home-container">
+        <div class="home-header">
+          <h1 class="home-title">Tests Psicológicos</h1>
+          <p class="home-subtitle">Selecciona un cuestionario para comenzar</p>
         </div>
-        
-        <div class="form-section">
-          <div class="form-group">
-            <label for="partner-name">Nombre de tu pareja</label>
-            <input type="text" id="partner-name" placeholder="Escribe el nombre aquí...">
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="user-sex">Sexo</label>
-              <select id="user-sex">
-                <option value="">Seleccionar</option>
-                <option value="Varón">Varón</option>
-                <option value="Mujer">Mujer</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="user-age">Edad</label>
-              <input type="number" id="user-age" placeholder="Años" min="1" max="120">
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="relationship-months">Tiempo de relación (en meses)</label>
-            <input type="number" id="relationship-months" placeholder="Meses" min="0">
-          </div>
-        </div>
-        
-        <button id="start-btn" class="btn btn-primary" disabled>Comenzar el test</button>
-        
-        <div class="instructions">
-          <h3>Instrucciones:</h3>
-          <p>Califica cada afirmación en una escala del 1 al 9:</p>
-          <ul>
-            <li><strong>1</strong> = en absoluto</li>
-            <li><strong>3</strong> = algo</li>
-            <li><strong>5</strong> = moderadamente</li>
-            <li><strong>7</strong> = bastante</li>
-            <li><strong>9</strong> = extremadamente</li>
-          </ul>
-        </div>
-      </div>
-    </div>
 
-    <!-- Questions Screen -->
-    <div id="questions-screen" class="screen">
-      <div class="questions-header">
-        <h2>Test del Amor Triangular</h2>
-        <p>Evaluando tu relación con <span id="header-partner-name"></span></p>
-        <div class="progress-container">
-          <div class="progress-bar">
-            <div id="progress-fill" class="progress-fill"></div>
-          </div>
-          <p id="progress-text">0 de 45 preguntas respondidas</p>
+        <div class="home-grid">
+          <a href="tests/sternberg/index.html" class="home-item" data-test="sternberg">
+            <div class="home-item-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <h3 class="home-item-title">Test del Amor Triangular</h3>
+            <p class="home-item-description">Escala de Sternberg (1997) - Evalúa intimidad, pasión y compromiso en tu relación de pareja.</p>
+          </a>
         </div>
-      </div>
-      
-      <div id="questions-container" class="questions-container"></div>
-      
-      <div class="questions-footer">
-        <button id="submit-btn" class="btn btn-primary" disabled>
-          Faltan 45 preguntas
-        </button>
-      </div>
-    </div>
 
-    <!-- Results Screen -->
-    <div id="results-screen" class="screen">
-      <div class="card results-card">
-        <h2>Resultados para <span id="results-partner-name"></span></h2>
-        
-        <div class="graph-container">
-          <svg id="triangle-graph" viewBox="0 0 400 380"></svg>
-        </div>
-        
-        <div class="scores-grid">
-          <div class="score-box intimacy">
-            <div id="intimacy-score" class="score-value">0</div>
-            <div class="score-label">Intimidad</div>
-            <div class="score-max">de 135 máx.</div>
-          </div>
-          <div class="score-box passion">
-            <div id="passion-score" class="score-value">0</div>
-            <div class="score-label">Pasión</div>
-            <div class="score-max">de 135 máx.</div>
-          </div>
-          <div class="score-box commitment">
-            <div id="commitment-score" class="score-value">0</div>
-            <div class="score-label">Compromiso</div>
-            <div class="score-max">de 135 máx.</div>
-          </div>
-        </div>
-        
-        <div id="love-type-box" class="love-type-box">
-          <h4>Tipo de amor: <span id="love-type"></span></h4>
-          <p id="love-type-description"></p>
-        </div>
-        
-        <div class="interpretation">
-          <h4>Interpretación de las puntuaciones:</h4>
-          <ul>
-            <li><strong>15-45:</strong> Nivel bajo</li>
-            <li><strong>46-90:</strong> Nivel moderado</li>
-            <li><strong>91-135:</strong> Nivel alto</li>
-          </ul>
-        </div>
-        
-        <div class="buttons-row">
-          <button id="download-pdf-btn" class="btn btn-secondary">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-            Descargar PDF
-          </button>
-          <button id="restart-btn" class="btn btn-primary">Realizar otro test</button>
-        </div>
-        
-        <p class="privacy-note">Los datos no se envían a ningún servidor. Todo se procesa localmente en tu dispositivo.</p>
+        <p class="home-footer">Los datos no se envían a ningún servidor. Todo se procesa localmente en tu dispositivo.</p>
       </div>
     </div>
   </div>
 
-  <script src="../node_modules/jspdf/dist/jspdf.umd.min.js"></script>
-  <script src="renderer.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>

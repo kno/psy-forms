@@ -22,8 +22,8 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js')
     },
     icon: path.join(__dirname, 'assets', 'icon.png'),
-    title: 'Test del Amor Triangular - Sternberg',
-    backgroundColor: '#fdf2f8'
+    title: 'Tests Psicológicos',
+    backgroundColor: '#f0f2f5'
   });
 
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
