@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
+  <title>Juego del mapa de amor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <a id="back-link" href="../../index.html">← Volver al menú</a>
+    <header><h1>Mapa de amor</h1><p>Un juego para conoceros mejor y disfrutar juntos.</p></header>
+    <section id="start-screen" class="card">
+      <h2>Cómo jugar</h2>
+      <p>Conocerse no debería ser una tarea. Jugad con buen humor y ánimo de divertiros: cuanto más juguéis, más aprenderéis sobre vuestro mapa de amor.</p>
+      <ol>
+        <li>Cada persona recibe 20 números al azar del 1 al 60, sin repeticiones en su lista.</li>
+        <li>Por turnos, lee tu pregunta a tu pareja, que responde en voz alta sobre ti.</li>
+        <li>Tú decides si ha acertado. Si acierta, recibe los puntos de la pregunta y tú recibes 1 punto. Si falla, nadie suma puntos.</li>
+        <li>Después de las 20 preguntas de cada persona, gana quien tenga más puntos.</li>
+      </ol>
+      <p>Podéis pasar cualquier pregunta: no suma puntos. No hace falta escribir ni guardar respuestas.</p>
+      <form id="start-form">
+        <div class="names"><label>Primera persona<input id="player-one" maxlength="60" placeholder="Persona 1" autocomplete="off"></label><label>Segunda persona<input id="player-two" maxlength="60" placeholder="Persona 2" autocomplete="off"></label></div>
+        <button type="submit">Sortear y comenzar</button>
+      </form>
+    </section>
+    <section id="game-screen" class="card" hidden>
+      <div id="scoreboard" class="scoreboard" aria-live="polite"></div>
+      <label for="progress">Progreso de la partida</label><progress id="progress" max="40" value="0"></progress>
+      <p id="turn-counter"></p>
+      <h2 id="turn-heading" tabindex="-1"></h2>
+      <p id="question-number" class="muted"></p>
+      <p id="question-text" class="question"></p>
+      <p id="points-description"></p>
+      <p>Responde en voz alta. Quien pregunta decide si la respuesta es correcta.</p>
+      <div class="actions"><button id="correct-btn" type="button">Respuesta correcta</button><button id="incorrect-btn" class="secondary" type="button">Respuesta incorrecta</button><button id="skip-btn" class="secondary" type="button">Pasar pregunta</button></div>
+      <button id="undo-btn" class="text-button" type="button" disabled>Deshacer último turno</button>
+    </section>
+    <section id="results-screen" class="card" hidden>
+      <h2 id="results-heading" tabindex="-1">Resultado de la partida</h2>
+      <p id="winner" class="question" aria-live="polite"></p>
+      <div id="final-scoreboard" class="scoreboard"></div>
+      <p>Lo más valioso es lo que habéis descubierto el uno del otro. Podéis conversar sobre las respuestas que os han sorprendido.</p>
+      <details><summary>Ver los turnos y las puntuaciones</summary><ol id="history"></ol></details>
+      <div class="actions"><button id="restart-btn" type="button">Jugar otra partida</button><button id="review-btn" class="secondary" type="button">Corregir último turno</button></div>
+    </section>
+    <footer>Los datos no se envían a ningún servidor ni se guardan. La partida se pierde al cerrar o recargar esta página.</footer>
+  </main>
+  <script src="questions.js"></script>
+  <script src="game.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

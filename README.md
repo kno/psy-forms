@@ -164,3 +164,15 @@ Sternberg, R. J. (1997). Construct validation of a triangular love scale. *Europ
 ---
 
 **Nota:** Esta es una herramienta educativa y de autoexploración. No sustituye el consejo profesional de un psicólogo o terapeuta de parejas.
+
+## Juego del mapa de amor
+
+Disponible desde el menú en escritorio (`src/`) y web/Android (`www/`). Incluye las 60 preguntas y sus puntos del documento «Juego mapa de amor». Cada persona recibe 20 preguntas aleatorias sin repeticiones en su lista; los turnos se alternan hasta completar 40. La pareja responde en voz alta y quien pregunta marca el acierto: la persona que responde suma los puntos de la pregunta y quien pregunta suma 1. Los fallos y las preguntas pasadas no suman.
+
+El marcador se actualiza durante la partida; se puede deshacer el último turno, revisar el resumen final y comenzar otra partida. Los nombres son opcionales. No se almacenan nombres ni respuestas, ni se transmiten datos.
+
+Para verificar el sorteo, los turnos y las puntuaciones sin instalar dependencias:
+
+```bash
+node --test tests/mapa-de-amor.test.js
+```
